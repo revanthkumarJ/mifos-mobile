@@ -14,7 +14,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -29,7 +31,9 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.mifos.mobile.HomeActivityUiState.Success
 import org.mifos.mobile.core.data.utils.NetworkMonitor
+import org.mifos.mobile.core.datastore.PreferencesHelper
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
+import org.mifos.mobile.core.model.enums.AppTheme
 import org.mifos.mobile.navigation.MifosNavGraph.AUTH_GRAPH
 import org.mifos.mobile.navigation.MifosNavGraph.PASSCODE_GRAPH
 import org.mifos.mobile.navigation.RootNavGraph
@@ -41,6 +45,9 @@ class HomeActivity : ComponentActivity() {
 
     @Inject
     lateinit var networkMonitor: NetworkMonitor
+
+    @Inject
+    lateinit var preferenceHelper: PreferencesHelper
 
     private val viewModel: HomeActivityViewModel by viewModels()
 
@@ -79,12 +86,18 @@ class HomeActivity : ComponentActivity() {
                 } else {
                     AUTH_GRAPH
                 }
-
                 else -> AUTH_GRAPH
             }
 
+            val currentTheme by preferenceHelper.themeFlow.collectAsState()
+            val isDarkMode = when (currentTheme) {
+                AppTheme.DARK -> true
+                AppTheme.LIGHT -> false
+                AppTheme.SYSTEM -> isSystemInDarkTheme()
+            }
+
             CompositionLocalProvider {
-                MifosMobileTheme {
+                MifosMobileTheme(isDarkMode) {
                     RootNavGraph(
                         appState = appState,
                         navHostController = navController,

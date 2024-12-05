@@ -139,6 +139,7 @@ fun PreferencesHelper.applySavedTheme() {
 
 internal fun PreferencesHelper.applyTheme(applicationTheme: AppTheme) {
     this.appTheme = applicationTheme.ordinal
+    this.themeFlowState.value = applicationTheme
     AppCompatDelegate.setDefaultNightMode(
         when {
             applicationTheme == AppTheme.DARK -> AppCompatDelegate.MODE_NIGHT_YES
