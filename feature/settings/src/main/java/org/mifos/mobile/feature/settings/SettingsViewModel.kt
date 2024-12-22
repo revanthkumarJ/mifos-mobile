@@ -9,8 +9,6 @@
  */
 package org.mifos.mobile.feature.settings
 
-import android.os.Build
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -70,15 +68,7 @@ internal class SettingsViewModel @Inject constructor(
     }
 
     fun updateTheme(theme: AppTheme) {
-        AppCompatDelegate.setDefaultNightMode(
-            when (theme) {
-                AppTheme.DARK -> AppCompatDelegate.MODE_NIGHT_YES
-                AppTheme.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
-                else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-            },
-        )
         preferencesHelper.appTheme = theme.ordinal
-        preferencesHelper.applyTheme(theme)
     }
 }
 
@@ -123,28 +113,4 @@ internal enum class SettingsCardItem(
         icon = R.drawable.ic_update,
         subclassOf = R.string.other,
     ),
-}
-
-fun PreferencesHelper.applySavedTheme() {
-    val applicationTheme = AppTheme.entries.find { it.ordinal == this.appTheme }
-    AppCompatDelegate.setDefaultNightMode(
-        when {
-            applicationTheme == AppTheme.DARK -> AppCompatDelegate.MODE_NIGHT_YES
-            applicationTheme == AppTheme.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
-            Build.VERSION.SDK_INT > Build.VERSION_CODES.P -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-            else -> AppCompatDelegate.MODE_NIGHT_NO
-        },
-    )
-}
-
-internal fun PreferencesHelper.applyTheme(applicationTheme: AppTheme) {
-    this.appTheme = applicationTheme.ordinal
-    AppCompatDelegate.setDefaultNightMode(
-        when {
-            applicationTheme == AppTheme.DARK -> AppCompatDelegate.MODE_NIGHT_YES
-            applicationTheme == AppTheme.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
-            Build.VERSION.SDK_INT > Build.VERSION_CODES.P -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-            else -> AppCompatDelegate.MODE_NIGHT_NO
-        },
-    )
 }

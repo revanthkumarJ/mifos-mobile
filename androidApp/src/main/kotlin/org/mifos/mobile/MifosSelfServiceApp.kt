@@ -14,8 +14,6 @@ import androidx.multidex.MultiDexApplication
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.raizlabs.android.dbflow.config.FlowManager
 import dagger.hilt.android.HiltAndroidApp
-import org.mifos.mobile.core.datastore.PreferencesHelper
-import org.mifos.mobile.feature.settings.applySavedTheme
 
 @HiltAndroidApp
 class MifosSelfServiceApp : MultiDexApplication() {
@@ -24,7 +22,6 @@ class MifosSelfServiceApp : MultiDexApplication() {
         MultiDex.install(this)
         FlowManager.init(this)
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
-        PreferencesHelper(this).applySavedTheme()
     }
 
     override fun onTerminate() {

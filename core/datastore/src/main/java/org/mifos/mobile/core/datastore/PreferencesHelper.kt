@@ -16,6 +16,8 @@ import android.text.TextUtils
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.callbackFlow
 import org.mifos.mobile.core.model.enums.AppTheme
@@ -29,8 +31,22 @@ import javax.inject.Singleton
  */
 @Singleton
 class PreferencesHelper @Inject constructor(@ApplicationContext context: Context?) {
+    val themeFlowState: MutableStateFlow<AppTheme>
+    val themeFlow: StateFlow<AppTheme> get() = themeFlowState
+
     private val sharedPreferences: SharedPreferences? =
         PreferenceManager.getDefaultSharedPreferences(context)
+
+    init {
+        if (!sharedPreferences?.contains(APPLICATION_THEME)!!) {
+            putInt(APPLICATION_THEME, AppTheme.SYSTEM.ordinal)
+        }
+        themeFlowState = MutableStateFlow(
+            AppTheme.entries.getOrNull(
+                sharedPreferences.getInt(APPLICATION_THEME, AppTheme.SYSTEM.ordinal),
+            ) ?: AppTheme.SYSTEM,
+        )
+    }
 
     fun clear() {
         val editor = sharedPreferences?.edit()
@@ -178,6 +194,7 @@ class PreferencesHelper @Inject constructor(@ApplicationContext context: Context
         get() = getInt(APPLICATION_THEME, AppTheme.SYSTEM.ordinal) ?: AppTheme.SYSTEM.ordinal
         set(value) {
             putInt(APPLICATION_THEME, value)
+            themeFlowState.value = AppTheme.entries[value]
         }
 
     var language
