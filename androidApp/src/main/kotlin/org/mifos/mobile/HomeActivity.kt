@@ -70,7 +70,6 @@ class HomeActivity : ComponentActivity() {
             }
         }
 
-
         enableEdgeToEdge()
 
         setContent {
