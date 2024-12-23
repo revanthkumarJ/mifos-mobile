@@ -18,6 +18,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.callbackFlow
 import org.mifos.mobile.core.model.enums.AppTheme
@@ -31,8 +32,8 @@ import javax.inject.Singleton
  */
 @Singleton
 class PreferencesHelper @Inject constructor(@ApplicationContext context: Context?) {
-    val themeFlowState: MutableStateFlow<AppTheme>
-    val themeFlow: StateFlow<AppTheme> get() = themeFlowState
+    private val themeFlowState: MutableStateFlow<AppTheme>
+    val themeFlow: StateFlow<AppTheme> get() = themeFlowState.asStateFlow()
 
     private val sharedPreferences: SharedPreferences? =
         PreferenceManager.getDefaultSharedPreferences(context)

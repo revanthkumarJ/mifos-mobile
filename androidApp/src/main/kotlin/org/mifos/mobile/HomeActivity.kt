@@ -17,7 +17,6 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -33,7 +32,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.mifos.mobile.HomeActivityUiState.Success
 import org.mifos.mobile.core.data.utils.NetworkMonitor
-import org.mifos.mobile.core.datastore.PreferencesHelper
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
 import org.mifos.mobile.core.designsystem.theme.darkScrim
 import org.mifos.mobile.core.designsystem.theme.lightScrim
@@ -50,9 +48,6 @@ class HomeActivity : ComponentActivity() {
     @Inject
     lateinit var networkMonitor: NetworkMonitor
 
-    @Inject
-    lateinit var preferenceHelper: PreferencesHelper
-
     private val viewModel: HomeActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +55,6 @@ class HomeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         var uiState: HomeActivityUiState by mutableStateOf(HomeActivityUiState.Loading)
 
-        // Update the uiState
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState
@@ -75,6 +69,7 @@ class HomeActivity : ComponentActivity() {
                 is Success -> false
             }
         }
+
 
         enableEdgeToEdge()
 
@@ -99,12 +94,15 @@ class HomeActivity : ComponentActivity() {
                 onDispose {}
             }
 
-            val currentTheme by preferenceHelper.themeFlow.collectAsState()
-            val isDarkMode = when (currentTheme) {
-                AppTheme.DARK -> true
-                AppTheme.LIGHT -> false
-                AppTheme.SYSTEM -> isSystemInDarkMode
+            val isDarkMode = when (uiState) {
+                is Success -> when ((uiState as Success).themeState) {
+                    AppTheme.DARK -> true
+                    AppTheme.LIGHT -> false
+                    AppTheme.SYSTEM -> isSystemInDarkMode
+                }
+                else -> isSystemInDarkMode
             }
+
             CompositionLocalProvider {
                 MifosMobileTheme(isDarkMode) {
                     RootNavGraph(

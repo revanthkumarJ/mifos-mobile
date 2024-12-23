@@ -14,22 +14,29 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.mifos.library.passcode.data.PasscodeManager
 import org.mifos.mobile.core.data.repository.UserDataRepository
+import org.mifos.mobile.core.datastore.PreferencesHelper
 import org.mifos.mobile.core.model.UserData
+import org.mifos.mobile.core.model.enums.AppTheme
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeActivityViewModel @Inject constructor(
     private val userDataRepository: UserDataRepository,
     private val passcodeManager: PasscodeManager,
+    private val preferencesHelper: PreferencesHelper
 ) : ViewModel() {
 
-    val uiState: StateFlow<HomeActivityUiState> = userDataRepository.userData.map {
-        HomeActivityUiState.Success(it)
+    val uiState: StateFlow<HomeActivityUiState> = combine(
+        userDataRepository.userData,
+        preferencesHelper.themeFlow
+    ) { userData, themeState ->
+        HomeActivityUiState.Success(userData, themeState)
     }.stateIn(
         scope = viewModelScope,
         initialValue = HomeActivityUiState.Loading,
@@ -46,5 +53,5 @@ class HomeActivityViewModel @Inject constructor(
 
 sealed interface HomeActivityUiState {
     data object Loading : HomeActivityUiState
-    data class Success(val userData: UserData) : HomeActivityUiState
+    data class Success(val userData: UserData,val themeState: AppTheme) : HomeActivityUiState
 }
