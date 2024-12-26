@@ -38,7 +38,7 @@
         <activity
             android:name=".HomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.MifosSplash"
+            android:theme="@style/Theme.Mifos.Splash"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

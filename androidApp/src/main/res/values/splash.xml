@@ -9,21 +9,30 @@
     See https://github.com/openMF/mobile-mobile/blob/master/LICENSE.md
 -->
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Allows us to override night specific attributes in the
-    values-night folder. -->
+
+    <!-- Base Theme for Night Mode -->
     <style name="NightAdjusted.Theme" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/status_bar</item>
     </style>
 
-    <!-- The final theme we use -->
-    <style name="Theme.MifosSplash" parent="NightAdjusted.Theme" />
-
-    <style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
-        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    <!-- Final Theme for the Application -->
+    <style name="Theme.MifosSplash" parent="NightAdjusted.Theme">
+        <!-- Splash background color -->
+        <item name="windowSplashScreenBackground">@color/white</item>
     </style>
 
+    <!-- Splash Screen Theme -->
+    <style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+        <!-- Splash screen animation duration -->
+        <item name="windowSplashScreenAnimationDuration">500</item>
+    </style>
+
+    <!-- Final Splash Theme -->
     <style name="Theme.Mifos.Splash" parent="NightAdjusted.Theme.Splash">
+        <!-- Icon for splash screen -->
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
+        <!-- Post splash screen theme -->
         <item name="postSplashScreenTheme">@style/Theme.MifosSplash</item>
     </style>
 </resources>
