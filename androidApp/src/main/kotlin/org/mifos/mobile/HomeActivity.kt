@@ -9,8 +9,10 @@
  */
 package org.mifos.mobile
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -88,8 +90,16 @@ class HomeActivity : ComponentActivity() {
 
             val isSystemInDarkMode = isSystemInDarkTheme()
             DisposableEffect(isSystemInDarkMode) {
-                window?.statusBarColor = if (isSystemInDarkMode) darkScrim.toArgb() else lightScrim.toArgb()
-                window?.navigationBarColor = if (isSystemInDarkMode) darkScrim.toArgb() else lightScrim.toArgb()
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.auto(
+                        Color.TRANSPARENT,
+                        Color.TRANSPARENT,
+                    ) { isSystemInDarkMode },
+                    navigationBarStyle = SystemBarStyle.auto(
+                        lightScrim.toArgb(),
+                        darkScrim.toArgb(),
+                    ) { isSystemInDarkMode },
+                )
                 onDispose {}
             }
 
