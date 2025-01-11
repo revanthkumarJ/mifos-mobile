@@ -14,7 +14,8 @@ enum class AppTheme(
 ) {
     SYSTEM(themeName = "System Theme"),
     LIGHT(themeName = "Light Theme"),
-    DARK(themeName = "Dark Theme");
+    DARK(themeName = "Dark Theme"),
+    ;
 
     companion object {
         fun fromOrdinal(ordinal: Int): AppTheme {

@@ -31,8 +31,6 @@ class PreferencesHelper(private val settings: Settings) {
             }
     }
 
-
-
     fun saveToken(token: String) {
         settings.putString(TOKEN, token)
     }
@@ -148,7 +146,7 @@ class PreferencesHelper(private val settings: Settings) {
             clientId = clientId,
             userName = userName,
             isAuthenticated = isAuthenticated,
-            userId = userId
+            userId = userId,
         )
     }
 
