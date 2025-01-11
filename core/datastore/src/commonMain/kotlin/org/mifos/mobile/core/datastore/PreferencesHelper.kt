@@ -202,7 +202,7 @@ class PreferencesHelper(private val settings: Settings) {
         return UserData(
             clientId = clientId,
             userName = userName,
-            isAuthenticated = isAuthenticated
+            isAuthenticated = isAuthenticated,
 
         )
     }
@@ -210,7 +210,7 @@ class PreferencesHelper(private val settings: Settings) {
     fun saveUserData(userData: UserData) {
         clientId = userData.clientId
         userName = userData.userName
-        isAuthenticated=userData.isAuthenticated
+        isAuthenticated = userData.isAuthenticated
     }
 
     fun getUser(): User {
@@ -223,7 +223,6 @@ class PreferencesHelper(private val settings: Settings) {
     fun saveUser(user: User) {
         userId = user.userId
         userName = user.userName
-
     }
 
     fun getAppSettings(): AppSettings {
@@ -232,7 +231,7 @@ class PreferencesHelper(private val settings: Settings) {
             baseUrl = baseUrl,
             passcode = passcode,
             appTheme = appTheme,
-            language = language
+            language = language,
         )
     }
 
@@ -243,7 +242,6 @@ class PreferencesHelper(private val settings: Settings) {
         putInt(APPLICATION_THEME, appSettings.appTheme)
         putString(LANGUAGE_TYPE, appSettings.language)
     }
-
 
     companion object {
         private const val USER_ID = "preferences_user_id"
