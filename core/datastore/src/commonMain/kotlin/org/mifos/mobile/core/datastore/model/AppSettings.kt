@@ -10,9 +10,16 @@
 package org.mifos.mobile.core.datastore.model
 
 data class AppSettings(
-    val tenant: String?,
-    val baseUrl: String?,
-    val passcode: String?,
-    val appTheme: Int?,
-    val language: String?,
-)
+    val tenant: String,
+    val baseUrl: String,
+    val passcode: String? = null,
+    val appTheme: AppTheme = AppTheme.SYSTEM,
+) {
+    companion object {
+        fun default() = AppSettings(
+            tenant = "default_tenant",
+            baseUrl = "https://default.url",
+            appTheme = AppTheme.SYSTEM,
+        )
+    }
+}

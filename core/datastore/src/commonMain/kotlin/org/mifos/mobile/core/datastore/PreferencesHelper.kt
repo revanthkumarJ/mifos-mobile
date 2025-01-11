@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.callbackFlow
 import org.mifos.mobile.core.datastore.model.AppSettings
 import org.mifos.mobile.core.datastore.model.AppTheme
 import org.mifos.mobile.core.datastore.model.MifosAppLanguage
-import org.mifos.mobile.core.datastore.model.User
 import org.mifos.mobile.core.datastore.model.UserData
 
 class PreferencesHelper(private val settings: Settings) {
@@ -32,170 +31,116 @@ class PreferencesHelper(private val settings: Settings) {
             }
     }
 
-    private fun getInt(preferenceKey: String?, preferenceDefaultValue: Int?): Int? {
-        return if (preferenceKey != null && preferenceDefaultValue != null) {
-            settings[preferenceKey, preferenceDefaultValue]
-        } else {
-            null
-        }
-    }
 
-    private fun putInt(preferenceKey: String?, preferenceValue: Int?) {
-        if (preferenceKey != null && preferenceValue != null) {
-            settings[preferenceKey] = preferenceValue
-        }
-    }
-
-    private fun getLong(preferenceKey: String?, preferenceDefaultValue: Long?): Long? {
-        return if (preferenceKey == null || preferenceDefaultValue == null) {
-            null
-        } else {
-            settings[preferenceKey, preferenceDefaultValue]
-        }
-    }
-
-    private fun putLong(preferenceKey: String?, preferenceValue: Long?) {
-        if (preferenceKey != null && preferenceValue != null) {
-            settings[preferenceKey] = preferenceValue
-        }
-    }
-
-    private fun getString(preferenceKey: String?, preferenceDefaultValue: String?): String? {
-        return if (preferenceKey == null || preferenceDefaultValue == null) {
-            null
-        } else {
-            settings[preferenceKey, preferenceDefaultValue]
-        }
-    }
-
-    private fun putString(preferenceKey: String?, preferenceValue: String?) {
-        if (preferenceKey != null && preferenceValue != null) {
-            settings[preferenceKey] = preferenceValue
-        }
-    }
-
-    private fun getBoolean(preferenceKey: String?, preferenceDefaultValue: Boolean?): Boolean? {
-        return if (preferenceKey == null || preferenceDefaultValue == null) {
-            null
-        } else {
-            settings[preferenceKey, preferenceDefaultValue]
-        }
-    }
-
-    private fun putBoolean(preferenceKey: String?, preferenceValue: Boolean?) {
-        if (preferenceKey != null && preferenceValue != null) {
-            settings[preferenceKey] = preferenceValue
-        }
-    }
 
     fun saveToken(token: String) {
-        putString(TOKEN, token)
+        settings.putString(TOKEN, token)
     }
 
     fun clearToken() {
-        putString(TOKEN, "")
+        settings.putString(TOKEN, "")
     }
 
     private val token: String?
-        get() = getString(TOKEN, "")
+        get() = settings.getString(TOKEN, "")
 
     var isAuthenticated: Boolean = false
         get() = !token.isNullOrEmpty()
 
-    var userId: Long?
-        get() = getLong(USER_ID, -1)
+    var userId: Long
+        get() = settings.getLong(USER_ID, -1)
         set(value) {
-            putLong(USER_ID, value)
+            settings.putLong(USER_ID, value)
         }
 
-    var userName: String?
-        get() = getString(USER_NAME, "")
+    var userName: String
+        get() = settings.getString(USER_NAME, "")
         set(value) {
-            putString(USER_NAME, value)
+            settings.putString(USER_NAME, value)
         }
 
-    var tenant: String?
-        get() = getString(TENANT, DEFAULT_TENANT)
+    var tenant: String
+        get() = settings.getString(TENANT, DEFAULT_TENANT)
         set(value) {
-            putString(TENANT, value)
+            settings.putString(TENANT, value)
         }
 
-    var passcode: String?
-        get() = getString(PASSCODE, "")
+    var passcode: String
+        get() = settings.getString(PASSCODE, "")
         set(value) {
-            putString(PASSCODE, value)
+            settings.putString(PASSCODE, value)
         }
 
-    var clientId: Long?
-        get() = getLong(CLIENT_ID, -1)
+    var clientId: Long
+        get() = settings.getLong(CLIENT_ID, -1)
         set(value) {
-            putLong(CLIENT_ID, value)
+            settings.putLong(CLIENT_ID, value)
         }
 
-    var clientName: String?
-        get() = getString(CLIENT_NAME, "")
+    var clientName: String
+        get() = settings.getString(CLIENT_NAME, "")
         set(value) {
-            putString(CLIENT_NAME, value)
+            settings.putString(CLIENT_NAME, value)
         }
 
-    var officeName: String?
-        get() = getString(OFFICE_NAME, "")
+    var officeName: String
+        get() = settings.getString(OFFICE_NAME, "")
         set(value) {
-            putString(OFFICE_NAME, value)
+            settings.putString(OFFICE_NAME, value)
         }
 
-    fun setOverviewState(state: Boolean?) {
-        putBoolean(OVERVIEW_STATE, state)
+    fun setOverviewState(state: Boolean) {
+        settings.putBoolean(OVERVIEW_STATE, state)
     }
 
-    fun overviewState(): Boolean? = getBoolean(OVERVIEW_STATE, true)
+    fun overviewState(): Boolean = settings.getBoolean(OVERVIEW_STATE, true)
 
-    fun saveGcmToken(token: String?) {
-        putString(GCM_TOKEN, token)
+    fun saveGcmToken(token: String) {
+        settings.putString(GCM_TOKEN, token)
     }
 
-    var userProfileImage: String?
-        get() = getString(PROFILE_IMAGE, null.toString())
+    var userProfileImage: String
+        get() = settings.getString(PROFILE_IMAGE, null.toString())
         set(value) {
-            putString(PROFILE_IMAGE, value)
+            settings.putString(PROFILE_IMAGE, value)
         }
 
-    val gcmToken: String?
-        get() = getString(GCM_TOKEN, "")
+    val gcmToken: String
+        get() = settings.getString(GCM_TOKEN, "")
 
-    fun setSentTokenToServer(state: Boolean?) {
-        putBoolean(SENT_TOKEN_TO_SERVER, state)
+    fun setSentTokenToServer(state: Boolean) {
+        settings.putBoolean(SENT_TOKEN_TO_SERVER, state)
     }
 
-    fun sentTokenToServerState(): Boolean? = getBoolean(SENT_TOKEN_TO_SERVER, false)
+    fun sentTokenToServerState(): Boolean = settings.getBoolean(SENT_TOKEN_TO_SERVER, false)
 
-    fun updateConfiguration(baseUrl: String?, tenant: String?) {
+    fun updateConfiguration(baseUrl: String, tenant: String) {
         settings.apply {
             putString(BASE_URL, baseUrl)
             putString(TENANT, tenant)
         }
     }
 
-    val baseUrl: String?
-        get() = getString(BASE_URL, DEFAULT_BASE_URL)
+    val baseUrl: String
+        get() = settings.getString(BASE_URL, DEFAULT_BASE_URL)
 
-    var appTheme: Int?
-        get() = getInt(APPLICATION_THEME, AppTheme.SYSTEM.ordinal)
+    var appTheme: AppTheme
+        get() = AppTheme.fromOrdinal(settings.getInt(APPLICATION_THEME, AppTheme.SYSTEM.ordinal))
         set(value) {
-            putInt(APPLICATION_THEME, value)
+            settings.putInt(APPLICATION_THEME, value.ordinal)
         }
 
-    var language: String?
-        get() = getString(LANGUAGE_TYPE, MifosAppLanguage.ENGLISH.code)
+    var language: String
+        get() = settings.getString(LANGUAGE_TYPE, MifosAppLanguage.ENGLISH.code)
             ?: MifosAppLanguage.SYSTEM_LANGUAGE.code
         set(value) {
-            putString(LANGUAGE_TYPE, value)
+            settings.putString(LANGUAGE_TYPE, value)
         }
 
-    var isDefaultSystemLanguage: Boolean?
-        get() = getBoolean(DEFAULT_SYSTEM_LANGUAGE, false)
+    var isDefaultSystemLanguage: Boolean
+        get() = settings.getBoolean(DEFAULT_SYSTEM_LANGUAGE, false)
         set(value) {
-            putBoolean(DEFAULT_SYSTEM_LANGUAGE, value)
+            settings.putBoolean(DEFAULT_SYSTEM_LANGUAGE, value)
         }
 
     fun getUserData(): UserData {
@@ -203,7 +148,7 @@ class PreferencesHelper(private val settings: Settings) {
             clientId = clientId,
             userName = userName,
             isAuthenticated = isAuthenticated,
-
+            userId = userId
         )
     }
 
@@ -213,34 +158,20 @@ class PreferencesHelper(private val settings: Settings) {
         isAuthenticated = userData.isAuthenticated
     }
 
-    fun getUser(): User {
-        return User(
-            userId = userId,
-            userName = userName,
-        )
-    }
-
-    fun saveUser(user: User) {
-        userId = user.userId
-        userName = user.userName
-    }
-
     fun getAppSettings(): AppSettings {
         return AppSettings(
             tenant = tenant,
             baseUrl = baseUrl,
             passcode = passcode,
             appTheme = appTheme,
-            language = language,
         )
     }
 
     fun saveAppSettings(appSettings: AppSettings) {
-        putString(TENANT, appSettings.tenant)
-        putString(BASE_URL, appSettings.baseUrl)
-        putString(PASSCODE, appSettings.passcode)
-        putInt(APPLICATION_THEME, appSettings.appTheme)
-        putString(LANGUAGE_TYPE, appSettings.language)
+        settings.putString(TENANT, appSettings.tenant)
+        settings.putString(BASE_URL, appSettings.baseUrl)
+        appSettings.passcode?.let { settings.putString(PASSCODE, it) }
+        settings.putInt(APPLICATION_THEME, appSettings.appTheme.ordinal)
     }
 
     companion object {
