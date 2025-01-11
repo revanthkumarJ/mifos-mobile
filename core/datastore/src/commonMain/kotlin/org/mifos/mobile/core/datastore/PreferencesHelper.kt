@@ -16,8 +16,11 @@ import com.russhwolf.settings.set
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import org.mifos.mobile.core.datastore.model.AppSettings
 import org.mifos.mobile.core.datastore.model.AppTheme
 import org.mifos.mobile.core.datastore.model.MifosAppLanguage
+import org.mifos.mobile.core.datastore.model.User
+import org.mifos.mobile.core.datastore.model.UserData
 
 class PreferencesHelper(private val settings: Settings) {
 
@@ -96,7 +99,7 @@ class PreferencesHelper(private val settings: Settings) {
     private val token: String?
         get() = getString(TOKEN, "")
 
-    val isAuthenticated: Boolean
+    var isAuthenticated: Boolean = false
         get() = !token.isNullOrEmpty()
 
     var userId: Long?
@@ -105,7 +108,7 @@ class PreferencesHelper(private val settings: Settings) {
             putLong(USER_ID, value)
         }
 
-    var username: String?
+    var userName: String?
         get() = getString(USER_NAME, "")
         set(value) {
             putString(USER_NAME, value)
@@ -127,12 +130,6 @@ class PreferencesHelper(private val settings: Settings) {
         get() = getLong(CLIENT_ID, -1)
         set(value) {
             putLong(CLIENT_ID, value)
-        }
-
-    var userName: String?
-        get() = getString(USER_NAME, "")
-        set(value) {
-            putString(USER_NAME, value)
         }
 
     var clientName: String?
@@ -200,6 +197,53 @@ class PreferencesHelper(private val settings: Settings) {
         set(value) {
             putBoolean(DEFAULT_SYSTEM_LANGUAGE, value)
         }
+
+    fun getUserData(): UserData {
+        return UserData(
+            clientId = clientId,
+            userName = userName,
+            isAuthenticated = isAuthenticated
+
+        )
+    }
+
+    fun saveUserData(userData: UserData) {
+        clientId = userData.clientId
+        userName = userData.userName
+        isAuthenticated=userData.isAuthenticated
+    }
+
+    fun getUser(): User {
+        return User(
+            userId = userId,
+            userName = userName,
+        )
+    }
+
+    fun saveUser(user: User) {
+        userId = user.userId
+        userName = user.userName
+
+    }
+
+    fun getAppSettings(): AppSettings {
+        return AppSettings(
+            tenant = tenant,
+            baseUrl = baseUrl,
+            passcode = passcode,
+            appTheme = appTheme,
+            language = language
+        )
+    }
+
+    fun saveAppSettings(appSettings: AppSettings) {
+        putString(TENANT, appSettings.tenant)
+        putString(BASE_URL, appSettings.baseUrl)
+        putString(PASSCODE, appSettings.passcode)
+        putInt(APPLICATION_THEME, appSettings.appTheme)
+        putString(LANGUAGE_TYPE, appSettings.language)
+    }
+
 
     companion object {
         private const val USER_ID = "preferences_user_id"
