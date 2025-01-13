@@ -9,9 +9,23 @@
  */
 package org.mifos.mobile.core.datastore.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class UserData(
-    val isAuthenticated: Boolean,
+    val userId: Long,
     val userName: String,
     val clientId: Long,
-    val userId: Long,
-)
+    val isAuthenticated: Boolean,
+    val base64EncodedAuthenticationKey: String,
+) {
+    companion object {
+        val DEFAULT = UserData(
+            userId = -1,
+            userName = "",
+            clientId = -1,
+            isAuthenticated = false,
+            base64EncodedAuthenticationKey = "",
+        )
+    }
+}

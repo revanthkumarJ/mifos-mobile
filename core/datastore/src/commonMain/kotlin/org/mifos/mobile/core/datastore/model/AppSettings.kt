@@ -9,6 +9,9 @@
  */
 package org.mifos.mobile.core.datastore.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class AppSettings(
     val tenant: String,
     val baseUrl: String,
@@ -16,9 +19,9 @@ data class AppSettings(
     val appTheme: AppTheme = AppTheme.SYSTEM,
 ) {
     companion object {
-        fun default() = AppSettings(
-            tenant = "default_tenant",
-            baseUrl = "https://default.url",
+        val DEFAULT = AppSettings(
+            tenant = "default",
+            baseUrl = "https://demo.mifos.community",
             appTheme = AppTheme.SYSTEM,
         )
     }
