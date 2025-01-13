@@ -28,7 +28,7 @@ import org.mifos.mobile.core.datastore.model.UserData
 private const val USER_DATA = "userData"
 private const val APP_SETTINGS = "appSettings"
 
-class UserPreferenceDataSource(
+class UserPreferencesDataSource(
     private val settings: Settings,
     private val dispatcher: CoroutineDispatcher,
 ) {

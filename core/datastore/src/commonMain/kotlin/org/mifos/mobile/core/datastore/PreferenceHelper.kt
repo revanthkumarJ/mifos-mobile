@@ -20,7 +20,8 @@ import org.mifos.mobile.core.datastore.model.AppTheme
 import org.mifos.mobile.core.datastore.model.UserData
 
 class PreferenceHelper(
-    private val preferenceManager: UserPreferenceDataSource,
+    private val preferenceManager: UserPreferencesDataSource,
+    private val ioDispatcher: CoroutineDispatcher,
     unconfinedDispatcher: CoroutineDispatcher,
 ) : UserPreferencesRepository {
     private val unconfinedScope = CoroutineScope(unconfinedDispatcher)

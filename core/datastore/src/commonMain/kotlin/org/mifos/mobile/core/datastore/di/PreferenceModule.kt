@@ -10,10 +10,35 @@
 package org.mifos.mobile.core.datastore.di
 
 import com.russhwolf.settings.Settings
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import org.mifos.mobile.core.datastore.PreferencesHelper
+import org.mifos.mobile.core.datastore.PreferenceHelper
+import org.mifos.mobile.core.datastore.UserPreferencesDataSource
+import org.mifos.mobile.core.datastore.UserPreferencesRepository
+
 
 val PreferencesModule = module {
-    single<Settings> { Settings() }
-    single { PreferencesHelper(settings = get()) }
+    factory<Settings> { Settings() }
+
+    factory {
+        UserPreferencesDataSource(
+            settings = get(),
+            dispatcher = get(named(MifosDispatchers.IO.name))
+        )
+    }
+
+    single<UserPreferencesRepository> {
+        PreferenceHelper(
+            preferenceManager = get(),
+            ioDispatcher = get(named(MifosDispatchers.IO.name)),
+            unconfinedDispatcher = get(named(MifosDispatchers.Unconfined.name)),
+        )
+    }
+}
+
+// Should be removed after common module conversion
+enum class MifosDispatchers {
+    Default,
+    IO,
+    Unconfined
 }
