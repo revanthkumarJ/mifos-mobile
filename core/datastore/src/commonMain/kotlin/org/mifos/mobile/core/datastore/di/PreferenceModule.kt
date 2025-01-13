@@ -16,14 +16,13 @@ import org.mifos.mobile.core.datastore.PreferenceHelper
 import org.mifos.mobile.core.datastore.UserPreferencesDataSource
 import org.mifos.mobile.core.datastore.UserPreferencesRepository
 
-
 val PreferencesModule = module {
     factory<Settings> { Settings() }
 
     factory {
         UserPreferencesDataSource(
             settings = get(),
-            dispatcher = get(named(MifosDispatchers.IO.name))
+            dispatcher = get(named(MifosDispatchers.IO.name)),
         )
     }
 
@@ -40,5 +39,5 @@ val PreferencesModule = module {
 enum class MifosDispatchers {
     Default,
     IO,
-    Unconfined
+    Unconfined,
 }
