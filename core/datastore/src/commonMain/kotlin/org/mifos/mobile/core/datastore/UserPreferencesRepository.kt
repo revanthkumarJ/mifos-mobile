@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.StateFlow
 import org.mifos.mobile.core.datastore.model.AppSettings
 import org.mifos.mobile.core.datastore.model.AppTheme
 import org.mifos.mobile.core.datastore.model.UserData
+import org.mifospay.core.common.DataState
 
 interface UserPreferencesRepository {
     val userInfo: Flow<UserData>

@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.stateIn
 import org.mifos.mobile.core.datastore.model.AppSettings
 import org.mifos.mobile.core.datastore.model.AppTheme
 import org.mifos.mobile.core.datastore.model.UserData
-import kotlin.Result
+import org.mifospay.core.common.DataState
 
 class UserPreferencesRepositoryImpl(
     private val preferenceManager: UserPreferencesDataSource,
@@ -56,48 +56,48 @@ class UserPreferencesRepositoryImpl(
     override val profileImage: String?
         get() = preferenceManager.getProfileImage()
 
-    override suspend fun updateToken(token: String): Result<Unit> {
+    override suspend fun updateToken(token: String): DataState<Unit> {
         return try {
             val result = preferenceManager.updateToken(token)
-            Result.success(result)
+            DataState.Success(result)
         } catch (e: Exception) {
-            Result.failure(e)
+            DataState.Error(e)
         }
     }
 
-    override suspend fun updateTheme(theme: AppTheme): Result<Unit> {
+    override suspend fun updateTheme(theme: AppTheme): DataState<Unit> {
         return try {
             val result = preferenceManager.updateTheme(theme)
-            Result.success(result)
+            DataState.Success(result)
         } catch (e: Exception) {
-            Result.failure(e)
+            DataState.Error(e)
         }
     }
 
-    override suspend fun updateUser(user: UserData): Result<Unit> {
+    override suspend fun updateUser(user: UserData): DataState<Unit> {
         return try {
             val result = preferenceManager.updateUserInfo(user)
-            Result.success(result)
+            DataState.Success(result)
         } catch (e: Exception) {
-            Result.failure(e)
+            DataState.Error(e)
         }
     }
 
-    override suspend fun updateSettings(appSettings: AppSettings): Result<Unit> {
+    override suspend fun updateSettings(appSettings: AppSettings): DataState<Unit> {
         return try {
             val result = preferenceManager.updateSettingsInfo(appSettings)
-            Result.success(result)
+            DataState.Success(result)
         } catch (e: Exception) {
-            Result.failure(e)
+            DataState.Error(e)
         }
     }
 
-    override suspend fun updateProfileImage(image: String): Result<Unit> {
+    override suspend fun updateProfileImage(image: String): DataState<Unit> {
         return try {
             val result = preferenceManager.updateProfileImage(image)
-            Result.success(result)
+            DataState.Success(result)
         } catch (e: Exception) {
-            Result.failure(e)
+            DataState.Error(e)
         }
     }
 
