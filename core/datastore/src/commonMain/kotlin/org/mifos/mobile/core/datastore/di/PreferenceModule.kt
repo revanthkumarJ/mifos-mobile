@@ -12,9 +12,9 @@ package org.mifos.mobile.core.datastore.di
 import com.russhwolf.settings.Settings
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import org.mifos.mobile.core.datastore.UserPreferencesRepositoryImpl
 import org.mifos.mobile.core.datastore.UserPreferencesDataSource
 import org.mifos.mobile.core.datastore.UserPreferencesRepository
+import org.mifos.mobile.core.datastore.UserPreferencesRepositoryImpl
 
 val PreferencesModule = module {
     factory<Settings> { Settings() }
