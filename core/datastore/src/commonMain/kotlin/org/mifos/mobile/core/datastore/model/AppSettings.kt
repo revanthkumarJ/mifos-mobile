@@ -21,7 +21,7 @@ data class AppSettings(
     companion object {
         val DEFAULT = AppSettings(
             tenant = "default",
-            baseUrl = "https://demo.mifos.community",
+            baseUrl = "https://gsoc.mifos.community/",
             appTheme = AppTheme.SYSTEM,
         )
     }
