@@ -9,7 +9,6 @@
  */
 package org.mifos.mobile.core.ui.component
 
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement

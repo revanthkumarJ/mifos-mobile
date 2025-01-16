@@ -9,7 +9,6 @@
  */
 package org.mifos.mobile.core.ui.component
 
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,6 +24,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import mifos_mobile.core.ui.generated.resources.Res
+import mifos_mobile.core.ui.generated.resources.no_internet
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -32,14 +33,12 @@ import org.jetbrains.compose.resources.stringResource
 import org.mifos.mobile.core.designsystem.icons.MifosIcons
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
 import org.mifos.mobile.core.ui.utils.DevicePreviews
-import mifos_mobile.core.ui.generated.resources.Res
-import mifos_mobile.core.ui.generated.resources.no_internet
 
 @Composable
 fun EmptyDataView(
     error: StringResource,
     modifier: Modifier = Modifier.fillMaxSize(),
-    icon: DrawableResource?=null,
+    icon: DrawableResource? = null,
     errorString: String? = null,
 ) {
     Column(

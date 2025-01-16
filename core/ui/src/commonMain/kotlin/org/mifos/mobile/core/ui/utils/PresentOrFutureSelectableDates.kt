@@ -31,4 +31,3 @@ object PresentOrFutureSelectableDates : SelectableDates {
         return year >= currentYear
     }
 }
-

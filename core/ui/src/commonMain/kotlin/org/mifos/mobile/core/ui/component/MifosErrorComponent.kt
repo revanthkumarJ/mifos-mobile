@@ -29,12 +29,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.jetbrains.compose.resources.stringResource
-import mifos_mobile.core.ui.generated.resources.no_internet
 import mifos_mobile.core.ui.generated.resources.Res
 import mifos_mobile.core.ui.generated.resources.no_data
+import mifos_mobile.core.ui.generated.resources.no_internet
 import mifos_mobile.core.ui.generated.resources.retry
 import mifos_mobile.core.ui.generated.resources.something_went_wrong
+import org.jetbrains.compose.resources.stringResource
 import org.mifos.mobile.core.designsystem.icons.MifosIcons
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
 import org.mifos.mobile.core.ui.utils.DevicePreviews

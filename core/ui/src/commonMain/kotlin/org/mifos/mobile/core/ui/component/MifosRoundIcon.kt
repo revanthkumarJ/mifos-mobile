@@ -9,7 +9,6 @@
  */
 package org.mifos.mobile.core.ui.component
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape

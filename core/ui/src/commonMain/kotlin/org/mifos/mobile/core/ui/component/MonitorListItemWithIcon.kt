@@ -9,7 +9,6 @@
  */
 package org.mifos.mobile.core.ui.component
 
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,14 +25,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import mifos_mobile.core.ui.generated.resources.Res
-import mifos_mobile.core.ui.generated.resources.something_went_wrong
 import mifos_mobile.core.ui.generated.resources.core_common_working
+import mifos_mobile.core.ui.generated.resources.something_went_wrong
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
 import org.mifos.mobile.core.ui.utils.DevicePreviews
-
 
 @Composable
 fun MonitorListItemWithIcon(

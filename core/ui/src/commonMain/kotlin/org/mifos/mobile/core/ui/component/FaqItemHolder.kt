@@ -15,7 +15,6 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,7 +27,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.mifos.mobile.core.designsystem.icons.MifosIcons
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
@@ -59,7 +57,6 @@ fun FaqItemHolder(
             Text(
                 text = question.orEmpty(),
                 style = MaterialTheme.typography.bodyMedium,
-                color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
@@ -68,7 +65,6 @@ fun FaqItemHolder(
             Icon(
                 imageVector = MifosIcons.ArrowDropDown,
                 contentDescription = "drop down",
-                tint = if (isSystemInDarkTheme()) Color.White else Color.Gray,
                 modifier = Modifier
                     .scale(1f, if (isSelected) -1f else 1f),
             )
@@ -85,7 +81,6 @@ fun FaqItemHolder(
             Text(
                 text = answer.orEmpty(),
                 style = MaterialTheme.typography.bodyMedium,
-                color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 8.dp),
