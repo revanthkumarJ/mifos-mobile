@@ -35,7 +35,7 @@ import mifos_mobile.core.ui.generated.resources.no_internet
 import mifos_mobile.core.ui.generated.resources.retry
 import mifos_mobile.core.ui.generated.resources.something_went_wrong
 import org.jetbrains.compose.resources.stringResource
-import org.mifos.mobile.core.designsystem.icons.MifosIcons
+import org.mifos.mobile.core.designsystem.icon.MifosIcons
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
 import org.mifos.mobile.core.ui.utils.DevicePreviews
 

@@ -26,6 +26,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import mifos_mobile.core.ui.generated.resources.Res
 import mifos_mobile.core.ui.generated.resources.core_common_working
+import mifos_mobile.core.ui.generated.resources.core_ui_money_in
 import mifos_mobile.core.ui.generated.resources.something_went_wrong
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -80,7 +81,7 @@ private fun MonitorListItemWithIconPreview(
         MonitorListItemWithIcon(
             titleId = Res.string.core_common_working,
             subTitleId = Res.string.something_went_wrong,
-            iconId = Res.drawable.core_common_circular_background,
+            iconId = Res.drawable.core_ui_money_in,
             onClick = {},
             modifier = modifier,
         )

@@ -15,7 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import org.mifos.mobile.core.designsystem.components.MifosTextButton
+import org.mifos.mobile.core.designsystem.component.MifosTextButton
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
 import org.mifos.mobile.core.ui.utils.DevicePreviews
 
@@ -42,13 +42,13 @@ fun MifosAlertDialog(
         onDismissRequest = onDismissRequest,
         confirmButton = {
             MifosTextButton(
-                text = confirmationText,
+                text = { Text(text = confirmationText) },
                 onClick = onConfirmation,
             )
         },
         dismissButton = {
             MifosTextButton(
-                text = dismissText,
+                text = { Text(text = dismissText) },
                 onClick = onDismissRequest,
             )
         },

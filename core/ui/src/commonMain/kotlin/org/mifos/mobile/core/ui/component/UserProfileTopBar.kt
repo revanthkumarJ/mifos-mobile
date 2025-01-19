@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
-import org.mifos.mobile.core.designsystem.icons.MifosIcons
+import org.mifos.mobile.core.designsystem.icon.MifosIcons
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

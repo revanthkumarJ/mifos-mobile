@@ -20,17 +20,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import mifos_mobile.core.ui.generated.resources.Res
 import mifos_mobile.core.ui.generated.resources.no_internet
-import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.mifos.mobile.core.designsystem.icons.MifosIcons
+import org.mifos.mobile.core.designsystem.icon.MifosIcons
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
 import org.mifos.mobile.core.ui.utils.DevicePreviews
 
@@ -38,7 +37,7 @@ import org.mifos.mobile.core.ui.utils.DevicePreviews
 fun EmptyDataView(
     error: StringResource,
     modifier: Modifier = Modifier.fillMaxSize(),
-    icon: DrawableResource? = null,
+    icon: ImageVector = MifosIcons.Error,
     errorString: String? = null,
 ) {
     Column(
@@ -50,11 +49,7 @@ fun EmptyDataView(
             modifier = Modifier
                 .size(100.dp)
                 .padding(bottom = 12.dp),
-            painter = if (icon != null) {
-                painterResource(icon)
-            } else {
-                MifosIcons.Error
-            },
+            imageVector = icon,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSecondary,
         )

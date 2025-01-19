@@ -26,6 +26,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import mifos_mobile.core.ui.generated.resources.Res
+import mifos_mobile.core.ui.generated.resources.core_common_working
+import mifos_mobile.core.ui.generated.resources.core_ui_money_in
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -95,7 +97,7 @@ private fun UserProfileFieldPreview(
     MifosMobileTheme {
         UserProfileField(
             text = Res.string.core_common_working,
-            icon = R.drawable.core_common_circular_background,
+            icon = Res.drawable.core_ui_money_in,
             onClick = {},
             modifier = modifier,
         )

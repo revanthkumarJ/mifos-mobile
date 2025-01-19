@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import mifos_mobile.core.ui.generated.resources.Res
+import mifos_mobile.core.ui.generated.resources.core_ui_money_in
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
@@ -47,7 +48,7 @@ private fun MifosMobileIconPreview(
 ) {
     MifosMobileTheme {
         MifosMobileIcon(
-            id = Res.drawable.core_common_circular_background,
+            id = Res.drawable.core_ui_money_in,
             modifier = modifier,
         )
     }

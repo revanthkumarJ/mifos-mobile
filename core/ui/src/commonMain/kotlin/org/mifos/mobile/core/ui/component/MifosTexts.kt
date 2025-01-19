@@ -28,6 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import mifos_mobile.core.ui.generated.resources.Res
+import mifos_mobile.core.ui.generated.resources.core_ui_money_in
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
@@ -190,7 +191,7 @@ private fun MifosTextTitleDescDrawableSingleLinePreview(
         MifosTextTitleDescDrawableSingleLine(
             title = "MifosTextTitleDescDrawableSingleLine Title",
             description = "MifosTextTitleDescDrawableSingleLine Description",
-            imageResId = Res.drawable.core_common_circular_background,
+            imageResId = Res.drawable.core_ui_money_in,
             modifier = modifier,
         )
     }

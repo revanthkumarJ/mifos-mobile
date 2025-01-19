@@ -31,9 +31,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
+import mifos_mobile.core.ui.generated.resources.Res
+import mifos_mobile.core.ui.generated.resources.retry
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
-import org.mifos.mobile.core.designsystem.icons.MifosIcons
+import org.mifos.mobile.core.designsystem.icon.MifosIcons
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
 import org.mifos.mobile.core.ui.utils.DevicePreviews
 
@@ -184,7 +186,7 @@ private fun MifosDropDownTextFieldPreview(
         MifosDropDownTextField(
             onClick = { _, _ -> },
             modifier = modifier,
-            labelResId = 0,
+            labelResId = Res.string.retry,
             isEnabled = true,
             supportingText = null,
             error = false,
@@ -203,7 +205,7 @@ private fun MifosDropDownDoubleTextFieldPreview(
         MifosDropDownDoubleTextField(
             onClick = { _, _ -> },
             modifier = modifier,
-            labelResId = 0,
+            labelResId = Res.string.retry,
             isEnabled = true,
             supportingText = null,
             error = false,

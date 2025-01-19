@@ -28,6 +28,8 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import mifos_mobile.core.ui.generated.resources.Res
+import mifos_mobile.core.ui.generated.resources.core_ui_money_in
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
@@ -97,8 +99,8 @@ private fun MifosHiddenTextRowPreview(
             hiddenText = "Hidden Text",
             hiddenColor = MaterialTheme.colorScheme.primary,
             hidingText = "Hiding Text",
-            visibilityIconId = 0,
-            visibilityOffIconId = 0,
+            visibilityIconId = Res.drawable.core_ui_money_in,
+            visibilityOffIconId = Res.drawable.core_ui_money_in,
             onClick = {},
             modifier = modifier,
         )

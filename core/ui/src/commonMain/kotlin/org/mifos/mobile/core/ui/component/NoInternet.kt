@@ -24,16 +24,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import mifos_mobile.core.ui.generated.resources.Res
 import mifos_mobile.core.ui.generated.resources.no_internet
-import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.mifos.mobile.core.designsystem.icons.MifosIcons
+import org.mifos.mobile.core.designsystem.icon.MifosIcons
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
 import org.mifos.mobile.core.ui.utils.DevicePreviews
 
@@ -42,7 +41,7 @@ fun NoInternet(
     error: StringResource,
     modifier: Modifier = Modifier,
     isRetryEnabled: Boolean = true,
-    icon: DrawableResource? = null,
+    icon: ImageVector = MifosIcons.WifiOff,
     retry: () -> Unit = {},
 ) {
     Column(
@@ -56,11 +55,7 @@ fun NoInternet(
             modifier = Modifier
                 .size(100.dp)
                 .padding(bottom = 12.dp),
-            painter = if (icon != null) {
-                painterResource(icon)
-            } else {
-                MifosIcons.WifiOff
-            },
+            imageVector = icon,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSecondary,
         )
@@ -90,7 +85,6 @@ private fun NoInternetPreview(
             error = Res.string.no_internet,
             modifier = modifier,
             isRetryEnabled = true,
-            icon = Res.drawable.core_common_circular_background,
             retry = {},
         )
     }

@@ -29,7 +29,7 @@ kotlin{
             implementation(libs.accompanist.pager)
         }
         commonMain.dependencies {
-//            api(projects.core.designsystem)
+            api(projects.core.designsystem)
             api(projects.core.model)
             api(projects.core.common)
             implementation(libs.jb.composeViewmodel)
