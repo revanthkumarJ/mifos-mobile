@@ -12,9 +12,7 @@ package org.mifos.mobile.core.model.entity
 /*
 * Created by saksham on 13/July/2018
 */
-class UpdatePasswordPayload {
-
-    val password: String? = null
-
-    val repeatPassword: String? = null
-}
+data class UpdatePasswordPayload(
+    val password: String? = null,
+    val repeatPassword: String? = null,
+)
