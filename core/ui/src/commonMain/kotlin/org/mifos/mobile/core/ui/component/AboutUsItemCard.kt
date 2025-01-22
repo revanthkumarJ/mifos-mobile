@@ -38,7 +38,7 @@ fun AboutUsItemCard(
         iconUrl?.let { painterResource(it) }?.let {
             Image(
                 painter = it,
-                contentDescription = null,
+                contentDescription = "About Us Icon URL",
                 modifier = Modifier.padding(end = 8.dp),
             )
         }

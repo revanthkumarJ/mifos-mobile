@@ -21,10 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import mifos_mobile.core.ui.generated.resources.Res
 import mifos_mobile.core.ui.generated.resources.no_internet
 import org.jetbrains.compose.resources.StringResource
@@ -57,7 +55,7 @@ fun EmptyDataView(
         Text(
             modifier = Modifier.padding(horizontal = 20.dp),
             text = errorString ?: stringResource(error),
-            style = TextStyle(fontSize = 20.sp),
+            style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSecondary,
             textAlign = TextAlign.Center,
         )

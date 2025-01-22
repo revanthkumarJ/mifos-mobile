@@ -78,7 +78,7 @@ fun NoInternetComponent(
                 .size(100.dp)
                 .padding(bottom = 12.dp),
             imageVector = MifosIcons.WifiOff,
-            contentDescription = null,
+            contentDescription = "Wifi Icon",
             tint = MaterialTheme.colorScheme.onSecondary,
         )
 

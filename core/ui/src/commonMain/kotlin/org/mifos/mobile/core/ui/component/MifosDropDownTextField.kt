@@ -80,7 +80,11 @@ fun MifosDropDownTextField(
                     } else {
                         MifosIcons.ArrowDropDown
                     },
-                    contentDescription = null,
+                    contentDescription = if (expanded) {
+                        "Arrow Up Icon"
+                    } else {
+                        "Arrow Down Icon"
+                    },
                 )
             },
         )
@@ -146,7 +150,11 @@ fun MifosDropDownDoubleTextField(
                     } else {
                         MifosIcons.ArrowDropDown
                     },
-                    contentDescription = null,
+                    contentDescription = if (expanded) {
+                        "Arrow Up Icon"
+                    } else {
+                        "Arrow Down Icon"
+                    },
                 )
             },
         )

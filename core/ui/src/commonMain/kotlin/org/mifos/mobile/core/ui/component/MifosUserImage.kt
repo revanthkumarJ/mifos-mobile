@@ -16,14 +16,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import coil3.Bitmap
 import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
 import org.mifos.mobile.core.ui.utils.DevicePreviews
 
 @Composable
 fun MifosUserImage(
-    bitmap: Bitmap?,
+    bitmap: ImageBitmap?,
     modifier: Modifier = Modifier,
     username: String? = null,
 ) {
@@ -37,7 +37,7 @@ fun MifosUserImage(
             modifier = modifier
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.primary),
-            bitmap = bitmap.asImageBitmap(),
+            bitmap = bitmap,
             contentDescription = "Profile Image",
             contentScale = ContentScale.Crop,
         )

@@ -28,7 +28,7 @@ import org.mifos.mobile.core.ui.utils.DevicePreviews
 @Composable
 fun MifosRoundIcon(
     iconId: DrawableResource,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Surface(
         color = MaterialTheme.colorScheme.surfaceVariant,
