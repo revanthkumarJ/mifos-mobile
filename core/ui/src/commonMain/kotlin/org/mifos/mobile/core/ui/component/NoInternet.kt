@@ -56,7 +56,7 @@ fun NoInternet(
                 .size(100.dp)
                 .padding(bottom = 12.dp),
             imageVector = icon,
-            contentDescription = null,
+            contentDescription = "No Internet Icon",
             tint = MaterialTheme.colorScheme.onSecondary,
         )
 

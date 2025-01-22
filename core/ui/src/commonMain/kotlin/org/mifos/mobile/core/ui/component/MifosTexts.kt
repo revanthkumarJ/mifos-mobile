@@ -116,7 +116,7 @@ fun MifosTextTitleDescDrawableSingleLine(
         Spacer(modifier = Modifier.width(5.dp))
         Image(
             painter = painterResource(imageResId),
-            contentDescription = null,
+            contentDescription = "Image",
             modifier = Modifier
                 .size(imageSize)
                 .clickable { onDrawableClick() },

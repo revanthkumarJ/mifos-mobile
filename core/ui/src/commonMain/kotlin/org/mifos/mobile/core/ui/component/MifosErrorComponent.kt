@@ -116,7 +116,7 @@ fun EmptyDataComponent(
                 .size(100.dp)
                 .padding(bottom = 12.dp),
             imageVector = MifosIcons.Info,
-            contentDescription = null,
+            contentDescription = "Info Icon",
             tint = MaterialTheme.colorScheme.onSecondary,
         )
 
@@ -160,7 +160,7 @@ fun EmptyDataComponentWithModifiedMessageAndIcon(
                 .size(100.dp)
                 .padding(bottom = 12.dp),
             imageVector = if (isEmptyData) icon else MifosIcons.Info,
-            contentDescription = null,
+            contentDescription = "Info Icon",
             tint = MaterialTheme.colorScheme.onSecondary,
         )
 

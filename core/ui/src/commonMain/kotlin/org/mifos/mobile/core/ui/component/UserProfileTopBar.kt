@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -53,13 +54,11 @@ fun UserProfileTopBar(
             ) {
                 Text(
                     text = stringResource(text),
-                    color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     style = TextStyle(fontSize = 24.sp),
                 )
                 Icon(
                     imageVector = MifosIcons.Edit,
-                    contentDescription = null,
-                    tint = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                    contentDescription = "User Profile Icon",
                 )
             }
         },
@@ -73,22 +72,15 @@ fun UserProfileTopBar(
             ) {
                 Icon(
                     imageVector = MifosIcons.ArrowBack,
-                    contentDescription = null,
+                    contentDescription = "Arrow Back Icon",
                     modifier = Modifier.clickable(onClick = {
                         home.invoke()
-                    }),
-                    tint = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                    })
                 )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = if (isSystemInDarkTheme()) {
-                Color(
-                    0xFF1B1B1F,
-                )
-            } else {
-                Color(0xFFFEFBFF)
-            },
+            containerColor = MaterialTheme.colorScheme.primary
         ),
     )
 }

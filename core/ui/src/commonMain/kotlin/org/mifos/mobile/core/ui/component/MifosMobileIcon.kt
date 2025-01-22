@@ -26,13 +26,13 @@ import org.mifos.mobile.core.ui.utils.DevicePreviews
 
 @Composable
 fun MifosMobileIcon(
-    id: DrawableResource,
+    mobileIcon: DrawableResource,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
         Image(
-            painter = painterResource(id),
-            contentDescription = null,
+            painter = painterResource(mobileIcon),
+            contentDescription = "Mobile Icon",
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally)
@@ -48,7 +48,7 @@ private fun MifosMobileIconPreview(
 ) {
     MifosMobileTheme {
         MifosMobileIcon(
-            id = Res.drawable.core_ui_money_in,
+            mobileIcon = Res.drawable.core_ui_money_in,
             modifier = modifier,
         )
     }

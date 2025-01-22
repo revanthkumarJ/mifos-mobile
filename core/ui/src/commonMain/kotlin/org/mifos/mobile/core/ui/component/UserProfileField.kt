@@ -51,16 +51,14 @@ fun UserProfileField(
     ) {
         Text(
             text = stringResource(text),
-            color = Color(0xFF8E9099),
             style = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.SemiBold),
         )
         Icon(
             painter = painterResource(icon),
-            contentDescription = null,
-            tint = if (isSystemInDarkTheme()) Color.White else Color.Black,
+            contentDescription = "User Profile Icon",
         )
     }
-    HorizontalDivider(color = if (isSystemInDarkTheme()) Color(0xFF8E9099) else Color.Black)
+    HorizontalDivider()
 }
 
 @Composable
@@ -77,16 +75,14 @@ fun UserProfileField(
     ) {
         Text(
             text = stringResource(label),
-            color = Color(0xFF8E9099),
             style = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.SemiBold),
         )
         Text(
             text = value,
-            color = if (isSystemInDarkTheme()) Color.White else Color.Black,
             style = TextStyle(fontSize = 14.sp),
         )
     }
-    HorizontalDivider(color = Color(0xFF8E9099))
+    HorizontalDivider()
 }
 
 @DevicePreviews

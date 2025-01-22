@@ -70,7 +70,7 @@ private fun MifosTextButtonWithTopDrawablePreview(
             textResourceId = Res.string.core_common_working,
             icon = MifosIcons.Add,
             onClick = {},
-            contentDescription = null,
+            contentDescription = "Add Icon",
             modifier = modifier,
         )
     }
