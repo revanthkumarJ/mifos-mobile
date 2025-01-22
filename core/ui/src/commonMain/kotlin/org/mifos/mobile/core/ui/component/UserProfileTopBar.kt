@@ -26,9 +26,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.mifos.mobile.core.designsystem.icon.MifosIcons
@@ -52,7 +50,7 @@ fun UserProfileTopBar(
             ) {
                 Text(
                     text = stringResource(text),
-                    style = TextStyle(fontSize = 24.sp),
+                    style = MaterialTheme.typography.bodySmall,
                 )
                 Icon(
                     imageVector = MifosIcons.Edit,
