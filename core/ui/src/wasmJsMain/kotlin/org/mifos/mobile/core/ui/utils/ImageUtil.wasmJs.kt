@@ -9,6 +9,7 @@
  */
 package org.mifos.mobile.core.ui.utils
 
+// TODO: Not Implemented
 actual object ImageUtil {
     actual val DEFAULT_MAX_WIDTH: Float
         get() = TODO("Not yet implemented")

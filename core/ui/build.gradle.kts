@@ -9,7 +9,6 @@
  */
 plugins {
     alias(libs.plugins.mifos.kmp.library)
-//    alias(libs.plugins.mifos.android.library.compose)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
 }
@@ -30,8 +29,7 @@ kotlin{
         }
         commonMain.dependencies {
             api(projects.core.designsystem)
-            api(projects.core.model)
-            api(projects.core.common)
+            api(libs.kotlinx.datetime)
             implementation(libs.jb.composeViewmodel)
             implementation(libs.jb.lifecycleViewmodel)
             implementation(libs.jb.lifecycleViewmodelSavedState)
@@ -43,7 +41,11 @@ kotlin{
             implementation(libs.jb.composeNavigation)
             implementation(libs.filekit.compose)
             implementation(libs.filekit.core)
-            implementation(libs.accompanist.systemuicontroller)
+        }
+        desktopMain.dependencies {
+                implementation(libs.kotlin.stdlib.jdk8)
+                implementation(libs.imageio.core)
+
         }
     }
 }
