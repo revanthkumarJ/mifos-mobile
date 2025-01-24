@@ -24,7 +24,6 @@ actual object ImageUtil {
         maxWidth: Float,
         maxHeight: Float,
     ): ByteArray {
-
         val inputStream = ByteArrayInputStream(decodedBytes)
         val originalImage: BufferedImage = try {
             ImageIO.read(inputStream)
@@ -37,7 +36,7 @@ actual object ImageUtil {
             originalImage.width.toFloat(),
             originalImage.height.toFloat(),
             maxWidth,
-            maxHeight
+            maxHeight,
         )
 
         val scaledImage = createScaledImage(originalImage, actualWidth, actualHeight)
@@ -56,7 +55,7 @@ actual object ImageUtil {
         actualWidth: Float,
         actualHeight: Float,
         maxWidth: Float,
-        maxHeight: Float
+        maxHeight: Float,
     ): Pair<Int, Int> {
         val imgRatio = actualWidth / actualHeight
         val maxRatio = maxWidth / maxHeight
@@ -93,4 +92,3 @@ actual object ImageUtil {
         return scaledImage
     }
 }
-
