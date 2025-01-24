@@ -1,5 +1,4 @@
 [versions]
-accompanistSystemuicontrollerVersion = "0.30.1"
 accompanistVersion = "0.34.0"
 activityVersion = "1.9.3"
 androidDesugarJdkLibs = "2.1.4"
@@ -46,7 +45,6 @@ hilt = "2.54"
 hiltExt = "1.2.0"
 jacoco = "0.8.7"
 junitVersion = "4.13.2"
-kotlinxDatetimeVersion = "0.4.0"
 ktlint = "12.1.1"
 libphonenumberAndroidVersion = "8.13.35"
 lifecycleExtensionsVersion = "2.2.0"

@@ -49,7 +49,4 @@ kotlin{
         }
     }
 }
-//dependencies {
-//    implementation(libs.androidx.ui.graphics.android)
-//}
 
