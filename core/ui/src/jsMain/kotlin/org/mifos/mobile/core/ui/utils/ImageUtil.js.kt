@@ -9,17 +9,16 @@
  */
 package org.mifos.mobile.core.ui.utils
 
+// TODO: Not Implemented
 actual object ImageUtil {
-    actual val DEFAULT_MAX_WIDTH: Float
-        get() = TODO("Not yet implemented")
-    actual val DEFAULT_MAX_HEIGHT: Float
-        get() = TODO("Not yet implemented")
+    actual val DEFAULT_MAX_WIDTH: Float = 816f
+    actual val DEFAULT_MAX_HEIGHT: Float = 612f
 
     actual fun compressImage(
         decodedBytes: ByteArray,
         maxWidth: Float,
         maxHeight: Float,
     ): ByteArray {
-        TODO("Not yet implemented")
+        return decodedBytes
     }
 }

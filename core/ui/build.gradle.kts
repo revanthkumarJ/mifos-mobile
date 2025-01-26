@@ -42,11 +42,6 @@ kotlin{
             implementation(libs.filekit.compose)
             implementation(libs.filekit.core)
         }
-        desktopMain.dependencies {
-                implementation(libs.kotlin.stdlib.jdk8)
-                implementation(libs.imageio.core)
-
-        }
     }
 }
 
