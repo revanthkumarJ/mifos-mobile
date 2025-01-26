@@ -16,7 +16,6 @@ import org.jetbrains.skia.ImageInfo
 import org.jetbrains.skia.Paint
 import org.jetbrains.skia.Rect
 
-
 actual object ImageUtil {
     actual val DEFAULT_MAX_WIDTH: Float = 816f
     actual val DEFAULT_MAX_HEIGHT: Float = 612f
@@ -83,7 +82,7 @@ actual object ImageUtil {
             Image.makeFromBitmap(bitmap),
             sourceRect,
             targetRect,
-            Paint()
+            Paint(),
         )
 
         return scaledBitmap
