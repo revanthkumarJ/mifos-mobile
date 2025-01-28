@@ -42,15 +42,12 @@ kotlin{
             implementation(libs.multiplatform.settings.coroutines)
 
             implementation(libs.kotlinx.coroutines.core)
+            implementation(projects.core.ui)
         }
         desktopMain.dependencies {
             implementation(libs.kotlinx.coroutines.swing)
         }
     }
-}
-dependencies {
-    implementation(project(":core:ui"))
-    implementation(project(":core:ui"))
 }
 
 protobuf {
