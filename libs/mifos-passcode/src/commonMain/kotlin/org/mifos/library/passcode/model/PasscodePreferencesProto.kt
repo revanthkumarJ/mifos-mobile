@@ -7,7 +7,7 @@
  *
  * See https://github.com/openMF/mobile-mobile/blob/master/LICENSE.md
  */
-package proto.org.mifos.library.passcode.model
+package org.mifos.library.passcode.model
 
 import kotlinx.serialization.Serializable
 

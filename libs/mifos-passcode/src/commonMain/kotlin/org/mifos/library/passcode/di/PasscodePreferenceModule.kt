@@ -12,9 +12,9 @@ package org.mifos.library.passcode.di
 import com.russhwolf.settings.Settings
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import org.mifos.library.passcode.data.PasscodeManager
+import org.mifos.library.passcode.data.PasscodePreferencesDataSource
 import org.mifos.mobile.core.common.MifosDispatchers
-import proto.org.mifos.library.passcode.data.PasscodeManager
-import proto.org.mifos.library.passcode.data.PasscodePreferencesDataSource
 
 val PasscodePreferenceModule = module {
     factory<Settings> { Settings() }

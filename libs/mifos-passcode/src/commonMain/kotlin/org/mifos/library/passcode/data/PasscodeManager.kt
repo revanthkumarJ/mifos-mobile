@@ -7,13 +7,13 @@
  *
  * See https://github.com/openMF/mobile-mobile/blob/master/LICENSE.md
  */
-package proto.org.mifos.library.passcode.data
+package org.mifos.library.passcode.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
-import proto.org.mifos.library.passcode.model.PasscodePreferencesProto
+import org.mifos.library.passcode.model.PasscodePreferencesProto
 
 class PasscodeManager(
     private val source: PasscodePreferencesDataSource,

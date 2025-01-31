@@ -9,7 +9,7 @@
  */
 @file:OptIn(ExperimentalSerializationApi::class, ExperimentalSettingsApi::class)
 
-package proto.org.mifos.library.passcode.data
+package org.mifos.library.passcode.data
 
 import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.Settings
@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
-import proto.org.mifos.library.passcode.model.PasscodePreferencesProto
+import org.mifos.library.passcode.model.PasscodePreferencesProto
 
 private const val PASSCODE_INFO_KEY = "passcodeInfo"
 
@@ -29,6 +29,7 @@ class PasscodePreferencesDataSource(
     private val settings: Settings,
     private val dispatcher: CoroutineDispatcher,
 ) {
+    @OptIn(ExperimentalSerializationApi::class)
     private val passcodeSettings = MutableStateFlow(
         settings.decodeValue(
             key = PASSCODE_INFO_KEY,

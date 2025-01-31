@@ -14,11 +14,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.mifos.library.passcode.data.PasscodeManager
 import org.mifos.library.passcode.utility.Step
 import org.mifos.mobile.core.model.Parcelable
 import org.mifos.mobile.core.model.Parcelize
 import org.mifos.mobile.core.ui.utils.BaseViewModel
-import proto.org.mifos.library.passcode.data.PasscodeManager
 
 private const val KEY_STATE = "passcode_state"
 private const val PASSCODE_LENGTH = 4
