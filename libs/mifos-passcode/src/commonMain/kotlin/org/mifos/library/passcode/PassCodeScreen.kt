@@ -76,7 +76,7 @@ internal fun PasscodeScreen(
     val xShake = remember { Animatable(initialValue = 0.0F) }
     var passcodeRejectedDialogVisible by remember { mutableStateOf(false) }
 
-    EventsEffect(viewModel) { event ->
+    EventsEffect(viewModel.eventFlow) { event ->
         when (event) {
             is PasscodeEvent.PasscodeConfirmed -> {
                 onPasscodeConfirm(event.passcode)
