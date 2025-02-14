@@ -11,7 +11,6 @@ plugins {
     alias(libs.plugins.mifos.cmp.feature)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -34,7 +33,7 @@ kotlin{
             implementation(libs.jb.kotlin.stdlib)
             implementation(libs.kotlin.reflect)
 
-            api(libs.protobuf.kotlin.lite)
+
             implementation(libs.kotlinx.serialization.core)
 
             implementation(libs.multiplatform.settings)
@@ -46,21 +45,6 @@ kotlin{
         }
         desktopMain.dependencies {
             implementation(libs.kotlinx.coroutines.swing)
-        }
-    }
-}
-
-protobuf {
-    protoc {
-        artifact = libs.protobuf.protoc.get().toString()
-    }
-    generateProtoTasks {
-        all().forEach { task ->
-            task.builtins {
-                register("kotlin") {
-                    option("lite")
-                }
-            }
         }
     }
 }
