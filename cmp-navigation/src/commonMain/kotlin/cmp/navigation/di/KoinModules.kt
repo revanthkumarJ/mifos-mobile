@@ -18,6 +18,7 @@ import org.mifos.mobile.core.data.di.RepositoryModule
 import org.mifos.mobile.core.datastore.di.PreferencesModule
 import org.mifos.mobile.core.network.di.NetworkModule
 import org.mifos.mobile.feature.auth.di.AuthModule
+import org.mifos.mobile.feature.help.di.HelpModule
 
 object KoinModules {
     private val commonModules = module {
@@ -38,6 +39,7 @@ object KoinModules {
     private val featureModules = module {
         includes(
             AuthModule,
+            HelpModule,
         )
     }
     private val LibraryModule = module {

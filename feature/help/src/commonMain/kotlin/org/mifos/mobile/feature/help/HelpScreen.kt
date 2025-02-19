@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Mifos Initiative
+ * Copyright 2025 Mifos Initiative
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -22,24 +22,28 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import org.mifos.mobile.core.designsystem.components.MifosScaffold
-import org.mifos.mobile.core.designsystem.components.MifosTopBar
-import org.mifos.mobile.core.designsystem.icons.MifosIcons
-import org.mifos.mobile.core.designsystem.theme.MifosMobileTheme
+import kotlinx.coroutines.launch
+import mifos_mobile.feature.help.generated.resources.Res
+import mifos_mobile.feature.help.generated.resources.call_now
+import mifos_mobile.feature.help.generated.resources.faq
+import mifos_mobile.feature.help.generated.resources.find_locations
+import mifos_mobile.feature.help.generated.resources.help
+import mifos_mobile.feature.help.generated.resources.leave_email
+import mifos_mobile.feature.help.generated.resources.no_questions_found
+import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
+import org.mifos.mobile.core.designsystem.component.MifosScaffold
+import org.mifos.mobile.core.designsystem.component.MifosTopBarTitleComposable
+import org.mifos.mobile.core.designsystem.icon.MifosIcons
 import org.mifos.mobile.core.model.entity.FAQ
 import org.mifos.mobile.core.ui.component.EmptyDataView
 import org.mifos.mobile.core.ui.component.FaqItemHolder
 import org.mifos.mobile.core.ui.component.MifosTextButtonWithTopDrawable
 import org.mifos.mobile.core.ui.component.MifosTitleSearchCard
-import org.mifos.mobile.core.ui.utils.DevicePreviews
 
 @Composable
 internal fun HelpScreen(
@@ -48,33 +52,32 @@ internal fun HelpScreen(
     findLocations: () -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HelpViewModel = hiltViewModel(),
+    viewModel: HelpViewModel = koinViewModel(),
 ) {
-    val context = LocalContext.current
-    val uiState by viewModel.helpUiState.collectAsStateWithLifecycle()
+    val uiState by viewModel.stateFlow.collectAsStateWithLifecycle()
+    val coroutineScope = rememberCoroutineScope()
 
-    LaunchedEffect(key1 = Unit) {
-        viewModel.loadFaq(
-            context.resources?.getStringArray(R.array.faq_qs),
-            context.resources?.getStringArray(R.array.faq_ans),
-        )
+    LaunchedEffect(Unit) {
+        coroutineScope.launch {
+            viewModel.trySendAction(HelpAction.LoadFaq)
+        }
     }
 
-    HelpScreen(
+    HelpScreenContent(
         uiState = uiState,
         callNow = callNow,
         leaveEmail = leaveEmail,
         findLocations = findLocations,
         navigateBack = navigateBack,
-        searchQuery = viewModel::filterList,
+        searchQuery = { query -> viewModel.trySendAction(HelpAction.SearchFaq(query)) },
         modifier = modifier,
-        onSearchDismiss = { viewModel.loadFaq(qs = null, ans = null) },
-        updateFaqPosition = viewModel::updateSelectedFaqPosition,
+        onSearchDismiss = { viewModel.trySendAction(HelpAction.LoadFaq) },
+        updateFaqPosition = { position -> viewModel.trySendAction(HelpAction.UpdateFaqPosition(position)) },
     )
 }
 
 @Composable
-private fun HelpScreen(
+private fun HelpScreenContent(
     uiState: HelpUiState,
     callNow: () -> Unit,
     leaveEmail: () -> Unit,
@@ -87,12 +90,12 @@ private fun HelpScreen(
 ) {
     MifosScaffold(
         topBar = {
-            MifosTopBar(
+            MifosTopBarTitleComposable(
                 navigateBack = navigateBack,
                 title = {
                     MifosTitleSearchCard(
                         searchQuery = searchQuery,
-                        titleResourceId = R.string.help,
+                        titleResourceId = Res.string.help,
                         onSearchDismiss = onSearchDismiss,
                     )
                 },
@@ -104,7 +107,7 @@ private fun HelpScreen(
                     is HelpUiState.Initial -> Unit
                     is HelpUiState.ShowFaq -> {
                         HelpContent(
-                            faqArrayList = uiState.faqArrayList.toList().filterNotNull(),
+                            faqArrayList = uiState.faqArrayList.toList(),
                             selectedFaqPosition = uiState.selectedFaqPosition,
                             callNow = callNow,
                             leaveEmail = leaveEmail,
@@ -129,12 +132,9 @@ private fun HelpContent(
     updateFaqPosition: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize(),
-    ) {
+    Column(modifier = modifier.fillMaxSize()) {
         Text(
-            text = stringResource(id = R.string.faq),
+            text = stringResource(Res.string.faq),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 8.dp),
@@ -143,11 +143,7 @@ private fun HelpContent(
         )
 
         if (faqArrayList.isNotEmpty()) {
-            LazyColumn(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
-            ) {
+            LazyColumn(modifier = Modifier.weight(1f).fillMaxWidth()) {
                 itemsIndexed(items = faqArrayList) { index, faqItem ->
                     FaqItemHolder(
                         index = index,
@@ -159,34 +155,25 @@ private fun HelpContent(
                 }
             }
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 4.dp),
-            ) {
+            Row(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
                 MifosTextButtonWithTopDrawable(
-                    modifier = Modifier
-                        .weight(1f),
+                    modifier = Modifier.fillMaxWidth().weight(1f),
                     onClick = callNow,
-                    textResourceId = R.string.call_now,
+                    textResourceId = Res.string.call_now,
                     icon = MifosIcons.Phone,
                     contentDescription = "Phone Icon",
                 )
                 MifosTextButtonWithTopDrawable(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
+                    modifier = Modifier.fillMaxWidth().weight(1f),
                     onClick = leaveEmail,
-                    textResourceId = R.string.leave_email,
+                    textResourceId = Res.string.leave_email,
                     icon = MifosIcons.Mail,
                     contentDescription = "Mail Icon",
                 )
                 MifosTextButtonWithTopDrawable(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
+                    modifier = Modifier.fillMaxWidth().weight(1f),
                     onClick = findLocations,
-                    textResourceId = R.string.find_locations,
+                    textResourceId = Res.string.find_locations,
                     icon = MifosIcons.LocationOn,
                     contentDescription = "Location Icon",
                 )
@@ -194,36 +181,8 @@ private fun HelpContent(
         } else {
             EmptyDataView(
                 modifier = Modifier.fillMaxSize(),
-                error = R.string.no_questions_found,
+                error = Res.string.no_questions_found,
             )
         }
-    }
-}
-
-internal class HelpScreenPreviewProvider : PreviewParameterProvider<HelpUiState> {
-    override val values: Sequence<HelpUiState>
-        get() = sequenceOf(
-            HelpUiState.Initial,
-            HelpUiState.ShowFaq(arrayListOf()),
-        )
-}
-
-@DevicePreviews
-@Composable
-private fun HelpScreenPreview(
-    @PreviewParameter(HelpScreenPreviewProvider::class)
-    helpUiState: HelpUiState,
-) {
-    MifosMobileTheme {
-        HelpScreen(
-            uiState = helpUiState,
-            callNow = { },
-            leaveEmail = { },
-            findLocations = {},
-            updateFaqPosition = { _ -> },
-            navigateBack = {},
-            searchQuery = { _ -> },
-            onSearchDismiss = { },
-        )
     }
 }

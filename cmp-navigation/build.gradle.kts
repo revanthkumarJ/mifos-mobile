@@ -19,7 +19,7 @@ kotlin {
         commonMain.dependencies {
 
             implementation(projects.feature.auth)
-
+            implementation(projects.feature.help)
             // Core Modules
             implementation(projects.core.data)
             implementation(projects.core.common)
