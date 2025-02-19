@@ -55,12 +55,9 @@ internal fun HelpScreen(
     viewModel: HelpViewModel = koinViewModel(),
 ) {
     val uiState by viewModel.stateFlow.collectAsStateWithLifecycle()
-    val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
-        coroutineScope.launch {
             viewModel.trySendAction(HelpAction.LoadFaq)
-        }
     }
 
     HelpScreenContent(

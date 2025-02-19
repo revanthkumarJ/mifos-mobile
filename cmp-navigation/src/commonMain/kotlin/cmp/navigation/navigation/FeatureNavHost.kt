@@ -56,7 +56,7 @@ fun NavGraphBuilder.homeScreen(navController: NavController) {
 }
 
 @Composable
-fun WelcomeScreen(navController: NavController,modifier: Modifier = Modifier) {
+fun WelcomeScreen(navController: NavController, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
