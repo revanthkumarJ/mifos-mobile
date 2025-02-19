@@ -22,11 +22,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import kotlinx.coroutines.launch
 import mifos_mobile.feature.help.generated.resources.Res
 import mifos_mobile.feature.help.generated.resources.call_now
 import mifos_mobile.feature.help.generated.resources.faq
@@ -57,7 +55,7 @@ internal fun HelpScreen(
     val uiState by viewModel.stateFlow.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
-            viewModel.trySendAction(HelpAction.LoadFaq)
+        viewModel.trySendAction(HelpAction.LoadFaq)
     }
 
     HelpScreenContent(

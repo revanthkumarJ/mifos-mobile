@@ -22,7 +22,7 @@ internal class HelpViewModel : BaseViewModel<HelpUiState, Nothing, HelpAction>(H
 
     private var allFaqList: List<FAQ>? = null
 
-    override  fun handleAction(action: HelpAction) {
+    override fun handleAction(action: HelpAction) {
         when (action) {
             is HelpAction.LoadFaq -> {
                 viewModelScope.launch {
