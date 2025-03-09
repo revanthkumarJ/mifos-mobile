@@ -53,6 +53,7 @@ internal fun HomeScreen(
             is HomeEvent.TotalSavings -> onNavigate(HomeDestinations.SAVINGS_ACCOUNT)
             is HomeEvent.UserProfile -> onNavigate(HomeDestinations.PROFILE)
             is HomeEvent.Notification -> onNavigate(HomeDestinations.NOTIFICATIONS)
+
         }
     }
 

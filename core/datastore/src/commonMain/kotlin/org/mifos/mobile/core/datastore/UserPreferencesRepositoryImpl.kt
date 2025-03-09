@@ -14,6 +14,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import org.mifos.mobile.core.common.DataState
 import org.mifos.mobile.core.datastore.model.AppSettings
@@ -22,10 +24,17 @@ import org.mifos.mobile.core.datastore.model.UserData
 
 class UserPreferencesRepositoryImpl(
     private val preferenceManager: UserPreferencesDataSource,
-//    private val ioDispatcher: CoroutineDispatcher,
     unconfinedDispatcher: CoroutineDispatcher,
 ) : UserPreferencesRepository {
     private val unconfinedScope = CoroutineScope(unconfinedDispatcher)
+
+    private val _themeFlowState: MutableStateFlow<AppTheme> = preferenceManager.appTheme.stateIn(
+        scope = unconfinedScope,
+        initialValue = AppTheme.SYSTEM,
+        started = SharingStarted.Eagerly
+    ) as MutableStateFlow<AppTheme>
+
+    override val appTheme: StateFlow<AppTheme> get() = _themeFlowState.asStateFlow()
 
     override val userInfo: Flow<UserData>
         get() = preferenceManager.userInfo
@@ -33,12 +42,12 @@ class UserPreferencesRepositoryImpl(
     override val settingsInfo: Flow<AppSettings>
         get() = preferenceManager.settingsInfo
 
-    override val appTheme: StateFlow<AppTheme?>
-        get() = preferenceManager.appTheme.stateIn(
-            scope = unconfinedScope,
-            initialValue = null,
-            started = SharingStarted.Eagerly,
-        )
+//    override val appTheme: StateFlow<AppTheme?>
+//        get() = preferenceManager.appTheme.stateIn(
+//            scope = unconfinedScope,
+//            initialValue = null,
+//            started = SharingStarted.Eagerly,
+//        )
     override val token: StateFlow<String?>
         get() = preferenceManager.token.stateIn(
             scope = unconfinedScope,
